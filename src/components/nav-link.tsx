@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import Link, { LinkProps } from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { sidebarNav } from "./mobile-nav";
 
 export default function NavLink() {
   const pathname = usePathname();

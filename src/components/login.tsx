@@ -113,7 +113,7 @@ export function Login() {
             </Button>
 
             <div className="text-center text-sm text-gray-500 dark:text-gray-400">
-              Don't have an account?
+              Do not have an account?
               <Link
                 className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500 underline"
                 href="/auth/signup"

@@ -2,8 +2,6 @@
 import { cn } from "@/lib/utils";
 import { messages } from "@prisma/client";
 import React, { useEffect, useRef } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default function Messages({ messages }: { messages: messages[] }) {
   const latestMessageRef = useRef<HTMLDivElement>(null);
