@@ -29,7 +29,7 @@ export default function MobileNav({
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 sm:hidden"
+          className="text-primary mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 sm:hidden"
         >
           <svg
             strokeWidth="1.5"
@@ -64,7 +64,7 @@ export default function MobileNav({
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="pr-0 relative h-dvh ">
-        <p className=" text-xl font-bold">LLAMA3</p>
+        <p className=" text-xl font-bold text-primary">LLAMA3</p>
         <Link
           href={"/"}
           className="w-full flex justify-between items-center bg-[#333333] p-2 rounded-lg"
