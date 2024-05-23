@@ -52,7 +52,6 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  messages      messages[]
   conversations conversation[]
 
   @@map("users")
@@ -71,7 +70,7 @@ model conversation {
   id        String     @id @default(cuid())
   user_id   String
   name      String?
-  users     User       @relation(fields: [user_id], references: [id])
+  users     User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
   messages  messages[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -82,11 +81,9 @@ model messages {
   conversation_id String
   message         String
   role            role
-  conversations   conversation @relation(fields: [conversation_id], references: [id])
+  conversations   conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
-  User            User?        @relation(fields: [userId], references: [id])
-  userId          String?
 }
 
 enum role {

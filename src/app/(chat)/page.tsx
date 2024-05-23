@@ -9,7 +9,7 @@ export default async function App() {
   }
   return (
     <main className=" min-w-full flex min-h-dvh flex-col items-center justify-between container scroll-smooth ">
-      <div className="fixed w-full px-6 sm:w-[700px] bottom-10 ">
+      <div className=" w-full px-6 sm:w-[700px] absolute bottom-10 ">
         <SendMessage />
       </div>
     </main>

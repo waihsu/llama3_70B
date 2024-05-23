@@ -102,15 +102,15 @@ export async function sendAMessage({
       },
     });
     const chatCompletion = await getGroqChatCompletion(message);
-    await prisma.messages.create({
+    const respMessg = await prisma.messages.create({
       data: {
         conversation_id: conversation_id,
         message: chatCompletion.choices[0].message.content,
         role: "assistant",
       },
     });
-    revalidatePath(`/${conversation_id}`);
-    return { messg: "successful" };
+
+    return { respMessg };
   } catch (err) {
     console.log(err);
     return { messg: "error" };

@@ -23,25 +23,33 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 
 import Link from "next/link";
 import { sendAMessage } from "@/app/server/actions";
-import { toast } from "./ui/use-toast";
+import { messages } from "@prisma/client";
 
 const sendMessageSchema = z.object({
+  conversation_id: z.string().optional(),
   message: z.string(),
 });
 
 interface Message {
-  name: string;
+  role: string;
   message: string;
 }
 
-export default function UnAuthChat() {
+export default function ChatForm({
+  messages,
+  conversation_id,
+}: {
+  messages: messages[];
+  conversation_id: string;
+}) {
   const form = useForm<z.infer<typeof sendMessageSchema>>({
     resolver: zodResolver(sendMessageSchema),
     defaultValues: {
+      conversation_id: conversation_id,
       message: "",
     },
   });
-  const [allmessages, setAllMessages] = useState<Message[]>([]);
+  const [allmessages, setAllMessages] = useState<Message[]>(messages);
   const latestMessageRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (latestMessageRef.current) {
@@ -53,19 +61,20 @@ export default function UnAuthChat() {
   async function onSubmit(values: z.infer<typeof sendMessageSchema>) {
     setAllMessages((pre) => [
       ...pre,
-      { name: "user", message: values.message },
+      { role: "user", message: values.message },
     ]);
-    const { messg } = await sendAMessage(values);
-    if (messg !== "error" && "successful") {
+    form.reset();
+    const { respMessg } = await sendAMessage(values);
+    if (respMessg) {
       setAllMessages((pre) => [
         ...pre,
-        { name: "assistant", message: String(messg) },
+        { role: respMessg.role, message: respMessg.message },
       ]);
     }
   }
   return (
-    <Card className="w-full h-[90%]  flex justify-between flex-col rounded-none">
-      <CardContent
+    <div className=" h-[90%] rounded-none">
+      <div
         ref={latestMessageRef}
         className="h-[86%] shadow-sm py-0  mb-6 flex flex-col space-y-3 overflow-y-scroll scrollbar-none  "
       >
@@ -74,9 +83,9 @@ export default function UnAuthChat() {
             <div
               className={cn(
                 "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
-                message.name === "user"
+                message.role === "user"
                   ? "ml-auto bg-primary text-primary-foreground"
-                  : "bg-muted"
+                  : "bg-muted overflow-x-scroll"
               )}
             >
               {message.message.split("\n").map((messg, index) => (
@@ -85,8 +94,8 @@ export default function UnAuthChat() {
             </div>
           </div>
         ))}
-      </CardContent>
-      <CardFooter className="bg-background ">
+      </div>
+      <div className="bg-background  w-full px-10">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -119,7 +128,7 @@ export default function UnAuthChat() {
             </Button>
           </form>
         </Form>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 }

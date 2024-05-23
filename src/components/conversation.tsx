@@ -9,7 +9,7 @@ import ConversationCard from "./conversation-card";
 export default async function Conversations() {
   const conversations = await getConversation();
   return (
-    <ScrollArea className=" h-full py-3 pb-5 px-2">
+    <ScrollArea className="h-[80%]  py-3 pb-5 px-2">
       <div className="flex flex-col space-y-3">
         {conversations &&
           conversations.map((item, index) => (

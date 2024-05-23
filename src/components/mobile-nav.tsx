@@ -62,11 +62,11 @@ export default function MobileNav({
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="pr-0">
+      <SheetContent side="left" className="pr-0 relative h-dvh ">
         <span className=" text-xl font-bold">LLAMA3</span>
 
-        <ScrollArea className="my-4 h-[calc(100vh-10rem)]  pl-6 ">
-          <div className="flex flex-col space-y-3  ">
+        <ScrollArea className="my-4 h-[80%]  pl-6 ">
+          <div className="flex flex-col space-y-3 ">
             {conversations?.map((item, index) => (
               <MobileLink
                 pathname={pathname}
@@ -80,17 +80,19 @@ export default function MobileNav({
             ))}
           </div>
         </ScrollArea>
-        {user ? (
-          <div className=" flex items-center gap-3">
-            <Avatar>
-              <AvatarImage src={String(user.image)} />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <span>{user.name}</span>
-          </div>
-        ) : (
-          <SocialLogin />
-        )}
+        <div className="">
+          {user ? (
+            <div className=" flex items-center gap-3">
+              <Avatar>
+                <AvatarImage src={String(user.image)} />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <span>{user.name}</span>
+            </div>
+          ) : (
+            <SocialLogin />
+          )}
+        </div>
       </SheetContent>
     </Sheet>
   );

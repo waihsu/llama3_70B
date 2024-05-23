@@ -18,12 +18,7 @@ export function ResizableLayout({ children }: { children: React.ReactNode }) {
         </div>
       </ResizablePanel>
       <ResizableHandle withHandle className="" />
-      <ResizablePanel defaultSize={75}>
-        <div className="">
-          <Navbar />
-          {children}
-        </div>
-      </ResizablePanel>
+      <ResizablePanel defaultSize={75}>{children}</ResizablePanel>
     </ResizablePanelGroup>
   );
 }
