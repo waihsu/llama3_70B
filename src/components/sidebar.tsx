@@ -8,7 +8,7 @@ import { Edit } from "lucide-react";
 export default async function SideBar() {
   const session = await auth();
   return (
-    <div className="relative h-full bg-primary">
+    <div className="relative h-full">
       <Link
         href={"/"}
         className="w-full flex justify-between items-center bg-[#333333] p-2 rounded-lg"
