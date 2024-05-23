@@ -12,6 +12,7 @@ import ConversationCard from "./conversation-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User } from "next-auth";
 import SocialLogin from "./social-login";
+import { Edit, FingerprintIcon } from "lucide-react";
 
 export default function MobileNav({
   conversations,
@@ -63,8 +64,17 @@ export default function MobileNav({
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="pr-0 relative h-dvh ">
-        <span className=" text-xl font-bold">LLAMA3</span>
-
+        <p className=" text-xl font-bold">LLAMA3</p>
+        <Link
+          href={"/"}
+          className="w-full flex justify-between items-center bg-[#333333] p-2 rounded-lg"
+        >
+          <div className="flex items-center">
+            <FingerprintIcon className="text-white h-6 w-6" />
+            <span className="text-white font-medium mx-2">New chat</span>
+          </div>
+          <Edit className=" self-end" />
+        </Link>
         <ScrollArea className="my-4 h-[80%]  pl-6 ">
           <div className="flex flex-col space-y-3 ">
             {conversations?.map((item, index) => (
