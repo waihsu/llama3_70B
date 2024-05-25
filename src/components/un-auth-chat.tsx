@@ -56,6 +56,7 @@ export default function UnAuthChat() {
       { name: "user", message: values.message },
     ]);
     const { messg } = await sendAMessage(values);
+    form.reset();
     if (messg !== "error" && "successful") {
       setAllMessages((pre) => [
         ...pre,
